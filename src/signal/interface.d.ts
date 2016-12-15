@@ -7,8 +7,7 @@ export interface ISignalLike<T> {
     on(handler: ISignalHandler<T>): void;
     once(handler: ISignalHandler<T>): void;
 
-    off(): void;
-    off(handler: ISignalHandler<T>);
+    off(handler?: ISignalHandler<T>);
 
 }
 

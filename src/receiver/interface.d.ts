@@ -11,6 +11,6 @@ export interface IReceiver extends IBase {
 }
 
 export type TStopReceivingOptions<T> = {
-    signal?: ISignalLike<T>,
-    handler?: ISignalHandler<T>
+    readonly signal?: ISignalLike<T>,
+    readonly handler?: ISignalHandler<T>
 }

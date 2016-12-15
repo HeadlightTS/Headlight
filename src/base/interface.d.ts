@@ -1,3 +1,3 @@
 export interface IBase {
-    cid: string;
+    readonly cid: string;
 }
