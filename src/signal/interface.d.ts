@@ -1,3 +1,4 @@
+import { IBase } from '../base/interface.d';
 
 export interface ISignalLike<T> {
 
@@ -11,8 +12,8 @@ export interface ISignalLike<T> {
 
 }
 
-export interface ISignal<T> extends ISignalLike<T> {
-    cid: string;
+export interface ISignal<T> extends ISignalLike<T>, IBase {
+
 }
 
 export interface ISignalHandler<T> {
