@@ -15,6 +15,6 @@
     "tslint.enable": true,
     "tslint.configFile": "tslint.json",
 
-    "travis.username": "HeadlightJS",
+    "travis.username": "HeadlightTS",
     "travis.repository": "Headlight"
 }
