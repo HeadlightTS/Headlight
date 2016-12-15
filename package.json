@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HeadlightTS/Headlight.git"
+    "url": "git+https://github.com/HeadlightTS/HeadlightTS.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HeadlightTS/Headlight/issues"
+    "url": "https://github.com/HeadlightTS/HeadlightTS/issues"
   },
-  "homepage": "https://github.com/HeadlightTS/Headlight#readme",
+  "homepage": "https://github.com/HeadlightTS/HeadlightTS#readme",
   "devDependencies": {
     "tslint": "^4.0.2",
     "typescript": "^2.1.4"
