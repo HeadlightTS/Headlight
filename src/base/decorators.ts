@@ -12,6 +12,7 @@ function generateCid(prefix: string): string {
     return prefix + cidMap[prefix];
 }
 
+
 export function cidPrefix(prefix: string): ClassDecorator {
     return function (target: Function): Function  {
         const originalConstructor = target,
@@ -20,6 +21,12 @@ export function cidPrefix(prefix: string): ClassDecorator {
 
                 return originalConstructor.apply(this, args);
             };
+
+        let staticKeys = Object.keys(originalConstructor);
+
+        staticKeys.forEach((key, index) => {
+            newConstructor[key] = originalConstructor[key];
+        });
 
         newConstructor.prototype = originalConstructor.prototype;
 

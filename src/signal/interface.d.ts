@@ -12,3 +12,13 @@ export interface ISignalLike<T> {
 export interface ISignalHandler<T> {
     (data: T): void;
 }
+
+export type TEventGroup<T> = {
+    handler: ISignalHandler<T>;
+    once: boolean;
+}; 
+
+// export interface IEventStorage<T> {
+//     common: TEventGroups<T>;
+//     [key: string]: TEventGroups<T>;
+// }
