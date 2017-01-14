@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "sh ./scripts/build.sh",
+    "test": "sh ./scripts/test.sh"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,20 @@
   },
   "homepage": "https://github.com/HeadlightTS/HeadlightTS#readme",
   "devDependencies": {
+    "karma": "^0.13.14",
+    "karma-chai-plugins": "^0.6.0",
+    "karma-commonjs": "^1.0.0",
+    "karma-coverage": "^0.5.3",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-remap-istanbul": "^0.1.1",
+    "mocha": "^2.3.3",
+    "phantomjs": "^1.9.18",
+    "phantomjs-polyfill": "0.0.1",
+    "promise-polyfill": "^5.2.1",
+    "tslib": "^1.5.0",
     "tslint": "^4.0.2",
-    "typescript": "^2.1.4"
+    "typescript": "^2.1.5",
+    "typings": "^2.1.0"
   }
 }

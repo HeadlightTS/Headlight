@@ -1,3 +1,4 @@
-export interface IBase {
-    readonly cid: string;
+export interface ICidMap {
+    [cidPrefix: string]: number;
 }
+

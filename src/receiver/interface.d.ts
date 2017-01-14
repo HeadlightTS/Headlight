@@ -1,16 +1,6 @@
-import { IBase } from '../base/interface.d';
-import { ISignalLike, ISignalHandler } from '../signal/interface.d';
-
-export interface IReceiver extends IBase {
-
-    receive<T>(signal: ISignalLike<T>, handler: ISignalHandler<T> ): void;
-    receiveOnce<T>(signal: ISignalLike<T>, handler: ISignalHandler<T> ): void;
-
-    stopReceiving<T>(options?: TStopReceivingOptions<T>): void;
-
-}
+import { ISignalHandler, ISignalLike } from '../signal/interface.d';
 
 export type TStopReceivingOptions<T> = {
-    readonly signal?: ISignalLike<T>,
+    readonly signals?: ISignalLike<T> | Array<ISignalLike<T>>,
     readonly handler?: ISignalHandler<T>
 }

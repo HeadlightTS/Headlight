@@ -1,23 +1,17 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": false,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": false,
-    "target": "es5",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "declaration": true,
-    "module": "umd",
-    "outDir": "build"
-  },
-  "exclude": [
-    "build",
-    "karma.conf.ts",
-    "tests",
-    "tests2",
-    "node_modules",
-    ".history",
-    ".vscode"
-  ]
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "target": "es5",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "module": "umd",
+        "outDir": "build/Release"
+    },
+    "include": [
+        "./src/**/*.ts"
+    ]
 }

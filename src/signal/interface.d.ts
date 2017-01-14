@@ -1,5 +1,3 @@
-import { IBase } from '../base/interface.d';
-
 export interface ISignalLike<T> {
 
     dispatch(data: T): void;
@@ -8,10 +6,6 @@ export interface ISignalLike<T> {
     once(handler: ISignalHandler<T>): void;
 
     off(handler?: ISignalHandler<T>): void;
-
-}
-
-export interface ISignal<T> extends ISignalLike<T>, IBase {
 
 }
 

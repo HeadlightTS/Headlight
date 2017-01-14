@@ -1,0 +1,19 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "typeRoots" : ["../typings/globals", "../typings/modules"],
+        "module": "commonjs",
+        "outDir": "../tmp"
+    },
+    "include": [
+        "./**/*.ts",
+        "../src/**/*.ts"
+    ],
+    "exclude": [
+        "build",
+        "tests",
+        "node_modules",
+        ".history",
+        ".vscode"
+    ]
+}
