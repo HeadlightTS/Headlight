@@ -1,6 +1,7 @@
 import { ISignalHandler, ISignalLike } from '../signal/interface.d';
+import { Signal } from '../signal/Signal';
 
 export type TStopReceivingOptions<T> = {
-    readonly signals?: ISignalLike<T> | Array<ISignalLike<T>>,
+    readonly signal?: Signal<T>,
     readonly handler?: ISignalHandler<T>
 }

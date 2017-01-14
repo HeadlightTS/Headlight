@@ -16,7 +16,10 @@ export class Signal<T> extends Base {
                 eventGroup.handler.call(receiver, data);
 
                 if (eventGroup.once) {
-                    groups.splice(index, 1);
+                    this.off({
+                        handler: eventGroup.handler,
+                        receiver: receiver
+                    });
                 }
             });
         });
@@ -61,17 +64,31 @@ export class Signal<T> extends Base {
                 return;
             }
 
-            Signal._removeEventGroupByHandler(groups, options.handler);
+            if (Signal._removeEventGroupByHandler(groups, options.handler)) {
+                options.receiver.stopReceiving({
+                    signal: this
+                });
+            }
         } else {
-            this._eventStorage.forEach((groups) => {
-                Signal._removeEventGroupByHandler(groups, options.handler);
+            this._eventStorage.forEach((groups, receiver) => {
+                if (Signal._removeEventGroupByHandler(groups, options.handler)) {
+                    receiver.stopReceiving({
+                        signal: this
+                    });
+                }
             });
         }
     }
 
+    public hasReceiver(receiver: Receiver): boolean {
+        return this._eventStorage.has(receiver);
+    }
+
     private _resetEventStorage(): void {
         this._eventStorage.forEach((eventGroups, receiver) => {
-            //todo удалить данный сигнал из ресивера
+            receiver.stopReceiving({
+                signal: this
+            });
         });
 
         this._eventStorage.clear();
@@ -86,12 +103,14 @@ export class Signal<T> extends Base {
         return this._eventStorage.get(receiver);
     }
 
-    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: ISignalHandler<T>): void {
+    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: ISignalHandler<T>): boolean {
         groups.forEach((eventGroup, index) => {
             if (eventGroup.handler === handler) {
                 groups.splice(index, 1);
             }
         });
+
+        return !groups.length;
     }
 }
 

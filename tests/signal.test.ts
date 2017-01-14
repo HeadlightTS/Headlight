@@ -20,11 +20,12 @@ describe('Signal.', () => {
 
     describe('Dispatches properly.', () => {
         it('Always.', () => {
-            let arg: THandlerArg = 0;
+            let arg: THandlerArg = 0,
+                r = new Receiver();
 
             signal.on((a: THandlerArg) => {
                 arg += a;
-            }, new Receiver());
+            }, r);
 
             signal.dispatch(1);
 
@@ -34,14 +35,16 @@ describe('Signal.', () => {
             signal.dispatch(5);
 
             chai.assert.equal(arg, 6);
+            chai.assert.isTrue(signal.hasReceiver(r));
         });
 
         it('Once.', () => {
-            let arg: THandlerArg = 0;
+            let arg: THandlerArg = 0,
+                r = new Receiver();
 
             signal.once((a: THandlerArg) => {
                 arg += a;
-            }, new Receiver());
+            }, r);
 
             signal.dispatch(1);
 
@@ -51,6 +54,7 @@ describe('Signal.', () => {
             signal.dispatch(5);
 
             chai.assert.equal(arg, 1);
+            chai.assert.isFalse(signal.hasReceiver(r));
         });
     });
 
