@@ -4,9 +4,5 @@
     "karma": "registry:dt/karma#0.13.9+20160811111312",
     "mocha": "registry:dt/mocha#2.2.5+20161221010438",
     "node": "registry:env/node#6.0.0+20170102175725"
-  },
-  "dependencies": {
-    "bluebird": "registry:dt/bluebird#3.0.0+20161229155504",
-    "log4js": "registry:dt/log4js#0.0.0+20160726182927"
   }
 }
