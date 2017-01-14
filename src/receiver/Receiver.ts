@@ -10,20 +10,16 @@ export class Receiver extends Base {
     private _signals: Set<Signal<any>> = new Set();
 
 
-    public receive<T>(handler: ISignalHandler<T>, ...signals: Array<Signal<T>>): void {
-        for (let signal of signals) {
-            signal.on(handler, this);
+    public receive<T>(handler: ISignalHandler<T>, signal: Signal<T>): void {
+        signal.on(handler, this);
 
-            this._signals.add(signal);
-        }
+        this._signals.add(signal);
     }
 
-    public receiveOnce<T>(handler: ISignalHandler<T>, ...signals: Array<Signal<T>>): void {
-        for (let signal of signals) {
-            signal.once(handler, this);
+    public receiveOnce<T>(handler: ISignalHandler<T>, signal: Signal<T>): void {
+        signal.once(handler, this);
 
-            this._signals.add(signal);
-        }
+        this._signals.add(signal);
     }
 
     public stopReceiving<T>(options: TStopReceivingOptions<T> = {}): void {
