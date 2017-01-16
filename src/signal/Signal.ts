@@ -23,7 +23,7 @@ export class Signal<T> extends Base {
     }
 
     public on(handler: ISignalHandler<T>, receiver: Receiver): void {
-        let group = this._getEventGroups(receiver);
+        const group = this._getEventGroups(receiver);
 
         group.push({
             handler: handler,
@@ -32,7 +32,7 @@ export class Signal<T> extends Base {
     }
 
     public once(handler: ISignalHandler<T>, receiver: Receiver): void {
-        let group = this._getEventGroups(receiver);
+        const group = this._getEventGroups(receiver);
 
         group.push({
             handler: handler,
@@ -55,7 +55,7 @@ export class Signal<T> extends Base {
                 return;
             }
 
-            let groups = this._eventStorage.get(options.receiver);
+            const groups = this._eventStorage.get(options.receiver);
 
             if (!Array.isArray(groups)) {
                 return;
