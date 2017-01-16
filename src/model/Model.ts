@@ -4,7 +4,7 @@ import { ISignalLike } from '../signal/interface.d';
 import { TModelChangeParam } from './interface.d';
 
 //@cidPrefix('m')
-export class Model<S> {
+export class Model<S> extends Receiver {
     public idAttribute: keyof S | 'id' = 'id';
 
     public readonly schema: {
@@ -20,6 +20,8 @@ export class Model<S> {
 
     
     constructor(data: S) {
+        super();
+        
         this._init();
     }
 
