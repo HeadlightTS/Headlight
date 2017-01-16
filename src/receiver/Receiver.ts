@@ -7,13 +7,13 @@ export class Receiver {
     private __signals: Set<Signal<any>> = new Set();
 
 
-    public receive<T>(handler: ISignalHandler<T>, signal: Signal<T>): void {
+    public receive<T>(signal: Signal<T>, handler: ISignalHandler<T>): void {
         signal.on(handler, this);
 
         this.__signals.add(signal);
     }
 
-    public receiveOnce<T>(handler: ISignalHandler<T>, signal: Signal<T>): void {
+    public receiveOnce<T>(signal: Signal<T>, handler: ISignalHandler<T>): void {
         signal.once(handler, this);
 
         this.__signals.add(signal);

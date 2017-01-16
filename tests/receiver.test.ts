@@ -20,9 +20,9 @@ describe('Receiver.', () => {
             let arg = 0,
                 signal = new Signal<number>();
 
-            receiver.receive((a) => {
+            receiver.receive(signal, (a) => {
                 arg += a;
-            }, signal);
+            });
 
             signal.dispatch(1);
 
@@ -38,9 +38,9 @@ describe('Receiver.', () => {
             let arg = 0,
                 signal = new Signal<number>();
 
-            receiver.receiveOnce((a) => {
+            receiver.receiveOnce(signal, (a) => {
                 arg += a;
-            }, signal);
+            });
 
             signal.dispatch(1);
 
@@ -59,13 +59,13 @@ describe('Receiver.', () => {
                     signal1 = new Signal<number>(),
                     signal2 = new Signal<number>();
 
-                receiver.receive((a) => {
+                receiver.receive(signal1, (a) => {
                     arg1 += a;
-                }, signal1);
+                });
 
-                receiver.receive((a) => {
+                receiver.receive(signal2, (a) => {
                     arg2 += a;
-                }, signal2);
+                });
 
                 receiver.stopReceiving();
 
@@ -85,13 +85,13 @@ describe('Receiver.', () => {
                     signal1 = new Signal<number>(),
                     signal2 = new Signal<number>();
 
-                receiver.receive((a) => {
+                receiver.receive(signal1, (a) => {
                     arg1 += a;
-                }, signal1);
+                });
 
-                receiver.receive((a) => {
+                receiver.receive(signal2, (a) => {
                     arg2 += a;
-                }, signal2);
+                });
 
                 receiver.stopReceiving({
                     signal: signal1
@@ -123,9 +123,9 @@ describe('Receiver.', () => {
                         arg2 += a;
                     };
 
-                receiver.receive(h1, signal1);
-                receiver.receive(h2, signal2);
-                receiver.receive(h3, signal2);
+                receiver.receive(signal1, h1);
+                receiver.receive(signal2, h2);
+                receiver.receive(signal2, h3);
 
                 receiver.stopReceiving({
                     handler: h2
@@ -163,9 +163,9 @@ describe('Receiver.', () => {
                         arg2 += a;
                     };
 
-                receiver.receive(h1, signal1);
-                receiver.receive(h2, signal2);
-                receiver.receive(h3, signal2);
+                receiver.receive(signal1, h1);
+                receiver.receive(signal2, h2);
+                receiver.receive(signal2, h3);
 
                 receiver.stopReceiving({
                     handler: h2,
