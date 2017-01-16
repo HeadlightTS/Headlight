@@ -1,12 +1,9 @@
-import { Base } from '../base/Base';
-import { BASE_TYPES } from '../base/baseTypes';
-import { cidPrefix } from '../base/decorators';
+import { BASE_TYPES } from '../baseTypes';
 import { ISignalLike, ISignalHandler, TEventGroup } from './interface.d';
 import { Receiver } from '../receiver/Receiver';
 
 
-@cidPrefix('s')
-export class Signal<T> extends Base {
+export class Signal<T> {
     private _eventStorage: Map<Receiver, Array<TEventGroup<T>>> = new Map();
 
 

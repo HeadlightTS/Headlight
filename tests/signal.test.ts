@@ -15,7 +15,6 @@ describe('Signal.', () => {
 
     it('Creates properly.', () => {
         chai.assert.instanceOf(signal, Signal);
-        chai.assert.equal('s', signal.cid.charAt(0));;
     });
 
     describe('Dispatches properly.', () => {

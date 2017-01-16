@@ -1,12 +1,9 @@
-import { Base, toArray } from '../base/Base';
-import { cidPrefix } from '../base/decorators';
 import { TStopReceivingOptions } from './interface.d';
 import { ISignalLike, ISignalHandler } from '../signal/interface.d';
 import { Signal } from '../signal/Signal';
  
 
-@cidPrefix('r')
-export class Receiver extends Base {
+export class Receiver {
     private _signals: Set<Signal<any>> = new Set();
 
 

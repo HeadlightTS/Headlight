@@ -13,7 +13,6 @@ describe('Receiver.', () => {
 
     it('Creates properly.', () => {
         chai.assert.instanceOf(receiver, Receiver);
-        chai.assert.equal('r', receiver.cid.charAt(0));;
     });
 
     describe('Receives signal.', () => {

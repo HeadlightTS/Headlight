@@ -80,8 +80,8 @@ module.exports = function(config: any): void {
             reports: {
                 html: 'coverage'
             },
-            timeoutNotCreated: 3000,
-            timeoutNoMoreFiles: 3000
+            timeoutNotCreated: 5000,
+            timeoutNoMoreFiles: 5000
         },
 
         client: {
