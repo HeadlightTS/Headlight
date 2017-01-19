@@ -87,7 +87,7 @@ describe('Signal.', () => {
         it('By handler.', () => {
             let arg1: THandlerArg = 0,
                 arg2: THandlerArg = 0;
-                
+
             const handler = (a: THandlerArg) => {
                     arg1 += a;
                 };
@@ -115,7 +115,7 @@ describe('Signal.', () => {
         it('By receiver.', () => {
             let arg1: THandlerArg = 0,
                 arg2: THandlerArg = 0;
-                
+
             const receiver = new Receiver();
 
             signal.on((a: THandlerArg) => {
@@ -145,7 +145,7 @@ describe('Signal.', () => {
             let arg1: THandlerArg = 0,
                 arg2: THandlerArg = 0,
                 arg3: THandlerArg = 0;
-                
+
             const receiver = new Receiver(),
                 handler = (a: THandlerArg) => {
                     arg1 += a;
