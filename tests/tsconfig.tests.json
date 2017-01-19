@@ -3,7 +3,8 @@
     "compilerOptions": {
         "typeRoots" : ["../typings/globals", "../typings/modules"],
         "module": "commonjs",
-        "outDir": "../tmp"
+        "outDir": "../tmp",
+        "sourceMap": true
     },
     "include": [
         "./**/*.ts",

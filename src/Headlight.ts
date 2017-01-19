@@ -1,3 +1,5 @@
+/// <reference path="../typings/index.d.ts" />
+
 import * as baseDecorators from './base/decorators';
 
 export { Base } from './base/Base';

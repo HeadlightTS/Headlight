@@ -9,7 +9,9 @@
         "emitDecoratorMetadata": true,
         "declaration": false,
         "module": "umd",
-        "outDir": "build/Release"
+        "outDir": "build/Release",
+        "listFiles": true,
+        "noEmitHelpers": true
     },
     "include": [
         "./src/**/*.ts"

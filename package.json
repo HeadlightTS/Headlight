@@ -20,8 +20,10 @@
   "devDependencies": {
     "karma": "^0.13.14",
     "karma-chai-plugins": "^0.6.0",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-commonjs": "^1.0.0",
     "karma-coverage": "^0.5.3",
+    "karma-es6-shim": "^1.0.0",
     "karma-mocha": "^0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-remap-istanbul": "^0.1.1",
@@ -33,5 +35,6 @@
     "tslint": "^4.0.2",
     "typescript": "^2.1.5",
     "typings": "^2.1.0"
-  }
+  },
+  "dependencies": {}
 }
