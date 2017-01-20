@@ -101,11 +101,11 @@ export class Signal<T> {
     }
 
     private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: ISignalHandler<T>): boolean {
-        groups.forEach((eventGroup, index) => {
-            if (eventGroup.handler === handler) {
-                groups.splice(index, 1);
+        for (let i = groups.length; i--; ) {
+            if (groups[i].handler === handler) {
+                groups.splice(i, 1);
             }
-        });
+        }
 
         return !groups.length;
     }
