@@ -1,5 +1,5 @@
 import { BASE_TYPES } from '../baseTypes';
-import { ISignalLike, ISignalHandler, TEventGroup } from './interface.d';
+import { ISignalLike, TSignalHandler, TEventGroup } from './interface.d';
 import { Receiver } from '../receiver/Receiver';
 
 
@@ -22,7 +22,7 @@ export class Signal<T> {
         });
     }
 
-    public on(handler: ISignalHandler<T>, receiver: Receiver): void {
+    public on(handler: TSignalHandler<T>, receiver: Receiver): void {
         const group = this._getEventGroups(receiver);
 
         group.push({
@@ -31,7 +31,7 @@ export class Signal<T> {
         });
     }
 
-    public once(handler: ISignalHandler<T>, receiver: Receiver): void {
+    public once(handler: TSignalHandler<T>, receiver: Receiver): void {
         const group = this._getEventGroups(receiver);
 
         group.push({
@@ -41,7 +41,7 @@ export class Signal<T> {
     }
 
     public off(options: {
-        handler?: ISignalHandler<T>,
+        handler?: TSignalHandler<T>,
         receiver?: Receiver
     } = {}): void {
         if (!options.handler && !options.receiver) {
@@ -100,7 +100,7 @@ export class Signal<T> {
         return this._eventStorage.get(receiver);
     }
 
-    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: ISignalHandler<T>): boolean {
+    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: TSignalHandler<T>): boolean {
         for (let i = groups.length; i--; ) {
             if (groups[i].handler === handler) {
                 groups.splice(i, 1);

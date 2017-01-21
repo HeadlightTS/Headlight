@@ -1,5 +1,5 @@
 import { TStopReceivingOptions } from './interface.d';
-import { ISignalLike, ISignalHandler } from '../signal/interface.d';
+import { ISignalLike, TSignalHandler } from '../signal/interface.d';
 import { Signal } from '../signal/Signal';
  
 
@@ -7,13 +7,13 @@ export class Receiver {
     private __signals: Set<Signal<any>> = new Set();
 
 
-    public receive<T>(signal: Signal<T>, handler: ISignalHandler<T>): void {
+    public receive<T>(signal: Signal<T>, handler: TSignalHandler<T>): void {
         signal.on(handler, this);
 
         this.__signals.add(signal);
     }
 
-    public receiveOnce<T>(signal: Signal<T>, handler: ISignalHandler<T>): void {
+    public receiveOnce<T>(signal: Signal<T>, handler: TSignalHandler<T>): void {
         signal.once(handler, this);
 
         this.__signals.add(signal);
@@ -40,7 +40,6 @@ export class Receiver {
                     this.__signals.delete(signal);
                 }
             });
-        }
-        
+        }   
     }
 }
