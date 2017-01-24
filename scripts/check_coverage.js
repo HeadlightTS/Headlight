@@ -11,4 +11,6 @@ const result = JSON.parse(fs.readFileSync(file).toString());
     }
 });
 
+console.log('Done');
+
 process.exit();

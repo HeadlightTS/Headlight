@@ -8,6 +8,6 @@ rm -rf ./build
 echo 'Compiling Headlight'
 node_modules/.bin/tsc -p ./ || exit 1
 
-echo '\nDONE'
+echo 'DONE'
 
 exit 0
