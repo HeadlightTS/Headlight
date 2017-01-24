@@ -1,24 +1,45 @@
-import { Base, toArray } from '../base/Base';
-import { cidPrefix } from '../base/decorators';
 import { TStopReceivingOptions } from './interface.d';
-import { ISignalLike, ISignalHandler } from '../signal/interface.d';
+import { ISignalLike, TSignalHandler } from '../signal/interface.d';
+import { Signal } from '../signal/Signal';
  
 
-@cidPrefix('r')
-export class Receiver extends Base {
-    public receive<T>(signals: ISignalLike<T> | Array<ISignalLike<T>>, handler: ISignalHandler<T> ): void {
-        signals = toArray(signals);
+export class Receiver {
+    private __signals: Set<Signal<any>> = new Set();
+
+
+    public receive<T>(signal: Signal<T>, handler: TSignalHandler<T>): void {
+        signal.on(handler, this);
+
+        this.__signals.add(signal);
     }
 
-    public receiveOnce<T>(signals: ISignalLike<T> | Array<ISignalLike<T>>, handler: ISignalHandler<T> ): void {
-        signals = toArray(signals);
+    public receiveOnce<T>(signal: Signal<T>, handler: TSignalHandler<T>): void {
+        signal.once(handler, this);
+
+        this.__signals.add(signal);
     }
 
-    public stopReceiving<T>(options?: TStopReceivingOptions<T>): void {
-        if (options) {
-            if (options.signals) {
-                const signals = toArray(options.signals);
+    public stopReceiving<T>(options: TStopReceivingOptions<T> = {}): void {
+        if (options.signal) {
+            options.signal.off({
+                receiver: this,
+                handler: options.handler
+            });
+
+            if (!options.signal.hasReceiver(this)) {
+                this.__signals.delete(options.signal);
             }
-        }
+        } else {
+            this.__signals.forEach((signal) => {
+                signal.off({
+                    receiver: this,
+                    handler: options.handler
+                });
+
+                if (!signal.hasReceiver(this)) {
+                    this.__signals.delete(signal);
+                }
+            });
+        }   
     }
 }

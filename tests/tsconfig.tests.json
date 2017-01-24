@@ -4,7 +4,8 @@
         "typeRoots" : ["../typings/globals", "../typings/modules"],
         "module": "commonjs",
         "outDir": "../tmp",
-        "sourceMap": true
+        "sourceMap": true,
+        "noEmitHelpers": true
     },
     "include": [
         "./**/*.ts",

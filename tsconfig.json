@@ -10,8 +10,7 @@
         "declaration": false,
         "module": "umd",
         "outDir": "build/Release",
-        "listFiles": true,
-        "noEmitHelpers": true
+        "listFiles": true
     },
     "include": [
         "./src/**/*.ts"

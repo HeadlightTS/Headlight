@@ -1,12 +1,9 @@
-import { Base } from '../base/Base';
-import { BASE_TYPES } from '../base/baseTypes';
-import { cidPrefix } from '../base/decorators';
-import { ISignalLike, ISignalHandler, TEventGroup } from './interface.d';
+import { BASE_TYPES } from '../baseTypes';
+import { ISignalLike, TSignalHandler, TEventGroup } from './interface.d';
 import { Receiver } from '../receiver/Receiver';
 
 
-@cidPrefix('s')
-export class Signal<T> extends Base {
+export class Signal<T> {
     private _eventStorage: Map<Receiver, Array<TEventGroup<T>>> = new Map();
 
 
@@ -16,13 +13,16 @@ export class Signal<T> extends Base {
                 eventGroup.handler.call(receiver, data);
 
                 if (eventGroup.once) {
-                    groups.splice(index, 1);
+                    this.off({
+                        handler: eventGroup.handler,
+                        receiver: receiver
+                    });
                 }
             });
         });
     }
 
-    public on(handler: ISignalHandler<T>, receiver: Receiver): void {
+    public on(handler: TSignalHandler<T>, receiver: Receiver): void {
         const group = this._getEventGroups(receiver);
 
         group.push({
@@ -31,7 +31,7 @@ export class Signal<T> extends Base {
         });
     }
 
-    public once(handler: ISignalHandler<T>, receiver: Receiver): void {
+    public once(handler: TSignalHandler<T>, receiver: Receiver): void {
         const group = this._getEventGroups(receiver);
 
         group.push({
@@ -41,7 +41,7 @@ export class Signal<T> extends Base {
     }
 
     public off(options: {
-        handler?: ISignalHandler<T>,
+        handler?: TSignalHandler<T>,
         receiver?: Receiver
     } = {}): void {
         if (!options.handler && !options.receiver) {
@@ -61,17 +61,31 @@ export class Signal<T> extends Base {
                 return;
             }
 
-            Signal._removeEventGroupByHandler(groups, options.handler);
+            if (Signal._removeEventGroupByHandler(groups, options.handler)) {
+                options.receiver.stopReceiving({
+                    signal: this
+                });
+            }
         } else {
-            this._eventStorage.forEach((groups) => {
-                Signal._removeEventGroupByHandler(groups, options.handler);
+            this._eventStorage.forEach((groups, receiver) => {
+                if (Signal._removeEventGroupByHandler(groups, options.handler)) {
+                    receiver.stopReceiving({
+                        signal: this
+                    });
+                }
             });
         }
     }
 
+    public hasReceiver(receiver: Receiver): boolean {
+        return this._eventStorage.has(receiver);
+    }
+
     private _resetEventStorage(): void {
         this._eventStorage.forEach((eventGroups, receiver) => {
-            //todo удалить данный сигнал из ресивера
+            receiver.stopReceiving({
+                signal: this
+            });
         });
 
         this._eventStorage.clear();
@@ -86,12 +100,14 @@ export class Signal<T> extends Base {
         return this._eventStorage.get(receiver);
     }
 
-    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: ISignalHandler<T>): void {
-        groups.forEach((eventGroup, index) => {
-            if (eventGroup.handler === handler) {
-                groups.splice(index, 1);
+    private static _removeEventGroupByHandler<T>(groups: Array<TEventGroup<T>>, handler: TSignalHandler<T>): boolean {
+        for (let i = groups.length; i--; ) {
+            if (groups[i].handler === handler) {
+                groups.splice(i, 1);
             }
-        });
+        }
+
+        return !groups.length;
     }
 }
 

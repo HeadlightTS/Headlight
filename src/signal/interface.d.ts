@@ -2,19 +2,19 @@ export interface ISignalLike<T> {
 
     dispatch(data: T): void;
 
-    on(handler: ISignalHandler<T>): void;
-    once(handler: ISignalHandler<T>): void;
+    on(handler: TSignalHandler<T>): void;
+    once(handler: TSignalHandler<T>): void;
 
-    off(handler?: ISignalHandler<T>): void;
+    off(handler?: TSignalHandler<T>): void;
 
 }
 
-export interface ISignalHandler<T> {
+export type TSignalHandler<T> = {
     (data: T): void;
 }
 
 export type TEventGroup<T> = {
-    handler: ISignalHandler<T>;
+    handler: TSignalHandler<T>;
     once: boolean;
 }; 
 

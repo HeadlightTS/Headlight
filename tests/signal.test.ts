@@ -15,16 +15,17 @@ describe('Signal.', () => {
 
     it('Creates properly.', () => {
         chai.assert.instanceOf(signal, Signal);
-        chai.assert.equal('s', signal.cid.charAt(0));;
     });
 
     describe('Dispatches properly.', () => {
         it('Always.', () => {
             let arg: THandlerArg = 0;
+            
+            const r = new Receiver();
 
             signal.on((a: THandlerArg) => {
                 arg += a;
-            }, new Receiver());
+            }, r);
 
             signal.dispatch(1);
 
@@ -34,14 +35,17 @@ describe('Signal.', () => {
             signal.dispatch(5);
 
             chai.assert.equal(arg, 6);
+            chai.assert.isTrue(signal.hasReceiver(r));
         });
 
         it('Once.', () => {
-            let arg: THandlerArg = 0;
+            let arg: THandlerArg = 0
+            
+            const r = new Receiver();
 
             signal.once((a: THandlerArg) => {
                 arg += a;
-            }, new Receiver());
+            }, r);
 
             signal.dispatch(1);
 
@@ -51,6 +55,7 @@ describe('Signal.', () => {
             signal.dispatch(5);
 
             chai.assert.equal(arg, 1);
+            chai.assert.isFalse(signal.hasReceiver(r));
         });
     });
 
@@ -82,7 +87,7 @@ describe('Signal.', () => {
         it('By handler.', () => {
             let arg1: THandlerArg = 0,
                 arg2: THandlerArg = 0;
-            
+
             const handler = (a: THandlerArg) => {
                     arg1 += a;
                 };
@@ -140,7 +145,7 @@ describe('Signal.', () => {
             let arg1: THandlerArg = 0,
                 arg2: THandlerArg = 0,
                 arg3: THandlerArg = 0;
-            
+
             const receiver = new Receiver(),
                 handler = (a: THandlerArg) => {
                     arg1 += a;
@@ -170,7 +175,7 @@ describe('Signal.', () => {
 
             signal.off({
                 receiver: new Receiver(),
-                handler: () => { let b = 0; } 
+                handler: () => { const b = 0; } 
             });
 
             signal.dispatch(5);
