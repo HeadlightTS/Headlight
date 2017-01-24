@@ -5,8 +5,9 @@
         "**/node_modules": true,
         "coverage": true,
         ".idea": true,
-        "typings": false,
+        "typings": true,
         "build": true,
+        "tmp": true,
         "**/*.map": true
     },
 

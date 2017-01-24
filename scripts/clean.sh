@@ -3,6 +3,6 @@
 echo 'Cleaning tests artifacts'
 rm -rf ./tmp || exit 1
 
-echo '\nDONE'
+echo 'DONE'
 
 exit 0
