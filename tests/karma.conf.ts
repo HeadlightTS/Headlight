@@ -1,94 +1,39 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path='../typings/index.d.ts' />
 
-module.exports = function(config: any): void {
+module.exports = function(config) {
     config.set({
-
-        // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '',
-
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['commonjs', 'mocha', 'chai', 'chai-as-promised'],
-
-        // list of files / patterns to load in the browser
+        frameworks: ['mocha', 'chai', 'chai-as-promised', 'karma-typescript'],
         files: [
-            //'../../node_modules/phantomjs-polyfill/bind-polyfill.js',
-            '../../node_modules/tslib/tslib.js',
-            '../**/*.js'
+            '../src/**/*.ts', 
+            '../tests/**/*.test.ts',
+            '../node_modules/tslib/tslib.js',
         ],
-
-        // list of files to exclude
-        exclude: [
-            '../../src/**/*.d.ts'   
-        ],
-
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            '../src/**/*.js': ['coverage'],
-            '../**/*.js': ['commonjs']
+            '../**/*.ts': ['karma-typescript'], 
         },
-
-        // test results reporter to use
-        // possible values: 'dots', 'progress'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'coverage', 'karma-remap-istanbul'],
-
-        // web server port
-        port: 9876,
-
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
-
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
-
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
-
-        // start these browsers
-        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        reporters: ['progress', 'karma-typescript'],
         browsers: ['Chrome'],
-
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
         singleRun: true,
-
-        // Concurrency level
-        // how many browser should be started simultanous
-        concurrency: Infinity,
-
-        coverageReporter: {
-            reporters: [{
-                type: 'json',
-                subdir: '../../',
-                file: 'coverage.json'
-            }],
-            check: {
-                global: {
-                statements: 100,
-                lines: 100,
-                functions: 100,
-                branches: 100
-                }
+        karmaTypescriptConfig: {
+            tsconfig: '../tests/tsconfig.tests.json',
+            reports: {
+                html: 'coverage',
+                'json-summary': {
+                    directory: 'coverage',
+                    filename: 'coverage.json'
+                },
+                'text-summary': ''
             }
         },
-
-        remapIstanbulReporter: {
-            src: 'tmp/coverage.json',
-            reports: {
-                html: 'coverage'
-            },
-            timeoutNotCreated: 5000,
-            timeoutNoMoreFiles: 5000
-        },
-
-        client: {
-            mocha: {
-                reporter: 'html', // change Karma's debug.html to the mocha web reporter
-                ui: 'bdd'
+        customLaunchers: {  
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
             }
         }
     });
+
+    if ((<any>process.env).TRAVIS) {  
+        config.browsers = ['Chrome_travis_ci'];
+    }
 };

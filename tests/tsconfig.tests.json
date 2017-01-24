@@ -8,7 +8,7 @@
         "noEmitHelpers": true
     },
     "include": [
-        "./**/*.ts",
+        "./**/*.test.ts",
         "../src/**/*.ts"
     ],
     "exclude": [
