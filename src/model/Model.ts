@@ -46,7 +46,7 @@ export class Model<S> extends Receiver {
 
     private _init(): void {
         for (let key of Object.keys(this.schema)) {
-            (<any>this.signals.change)[key] = new Signal('');
+            (<any>this.signals.change)[key] = new Signal();
         }
     }    
 }

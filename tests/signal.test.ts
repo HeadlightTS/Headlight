@@ -8,7 +8,7 @@ describe('Signal.', () => {
     let signal: Signal<THandlerArg>;
 
     beforeEach(() => {
-        signal = new Signal<THandlerArg>(0);
+        signal = new Signal<THandlerArg>();
     });
 
     it('Creates properly.', () => {

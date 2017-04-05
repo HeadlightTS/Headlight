@@ -4,20 +4,20 @@ import { Receiver } from '../receiver/Receiver';
 
 
 export class Signal<T> {
-    public get data(): T {
-        return this.__data;
-    }
+    // public get data(): T {
+    //     return this.__data;
+    // }
 
     private _eventStorage: Map<Receiver, Array<TEventGroup<T>>> = new Map<Receiver, Array<TEventGroup<T>>>();
-    private __data: T;
+    //private __data: T;
 
 
-    constructor(data: T) {
-        this.__data = data;
+    constructor(/*data: T*/) {
+        //this.__data = data;
     }
 
     public dispatch(data: T): void {
-        this.__data = data;
+        //this.__data = data;
 
         this._eventStorage.forEach((groups, receiver) => {
             groups.forEach((eventGroup, index) => {
