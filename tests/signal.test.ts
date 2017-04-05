@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 import { Signal } from '../src/signal/Signal';
 import { Receiver } from '../src/receiver/Receiver';
 
@@ -10,7 +8,7 @@ describe('Signal.', () => {
     let signal: Signal<THandlerArg>;
 
     beforeEach(() => {
-        signal = new Signal<THandlerArg>();
+        signal = new Signal<THandlerArg>(0);
     });
 
     it('Creates properly.', () => {

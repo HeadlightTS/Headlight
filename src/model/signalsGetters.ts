@@ -12,7 +12,7 @@ let changeSignals = {
 Object.defineProperty(signalsGetters, 'changeAny', {
     get(): Signal<any> {
         if (!this.__context.__signalStorage.changeAny) {
-            this.__context.__signalStorage.changeAny = new Signal();
+            this.__context.__signalStorage.changeAny = new Signal('');
         }
         
         return this.__context.__signalStorage.changeAny;
