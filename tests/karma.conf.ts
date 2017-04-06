@@ -1,5 +1,3 @@
-/// <reference path='../typings/index.d.ts' />
-
 module.exports = function(config) {
     config.set({
         frameworks: ['mocha', 'chai', 'chai-as-promised', 'karma-typescript'],

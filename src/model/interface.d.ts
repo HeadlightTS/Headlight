@@ -6,3 +6,11 @@ export type TModelChangeParam<T, M extends Model<any>> = {
     readonly previous: T;
     readonly model: M;
 };
+
+export type TSignalStorage = {
+    [key: string]: Signal<any>
+};
+
+export type TSchema<S> = {
+    readonly [T in keyof S]: S[T];
+}

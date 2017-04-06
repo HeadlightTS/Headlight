@@ -6,6 +6,4 @@ node_modules/typescript/bin/tsc ./tests/karma.conf.ts --outFile ./tmp/karma.conf
 echo 'Start tests'
 node_modules/karma/bin/karma start tmp/karma.conf.js || exit 1
 
-echo 'DONE'
-
 exit 0

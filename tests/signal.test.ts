@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 import { Signal } from '../src/signal/Signal';
 import { Receiver } from '../src/receiver/Receiver';
 

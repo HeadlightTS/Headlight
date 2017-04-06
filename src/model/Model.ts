@@ -1,7 +1,7 @@
 import { Receiver } from '../receiver/Receiver';
 import { Signal } from '../signal/Signal';
 import { ISignalLike } from '../signal/interface.d';
-import { TModelChangeParam } from './interface.d';
+import { TModelChangeParam, TSignalStorage, TSchema } from './interface.d';
 import { signalsGetters } from './signalsGetters';
 
 export class Model<S> extends Receiver {
@@ -18,13 +18,9 @@ export class Model<S> extends Receiver {
         return <any>signalsGetters;
     };
 
-    public readonly schema: {
-        readonly [T in keyof S]: S[T];
-    } = <Model<S>['schema']>{};
+    public readonly schema: TSchema<S> = <TSchema<S>>{};
 
-    private __signalStorage: {
-        [key: string]: Signal<any>
-    } = {};
+    private __signalStorage: TSignalStorage = {};
     
     constructor(data: S) {
         super();

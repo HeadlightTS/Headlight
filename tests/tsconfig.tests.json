@@ -1,7 +1,6 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-        "typeRoots" : ["../typings/globals", "../typings/modules"],
         "module": "commonjs",
         "outDir": "../tmp",
         "sourceMap": true,

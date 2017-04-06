@@ -4,7 +4,7 @@ import { Signal } from '../signal/Signal';
  
 
 export class Receiver {
-    private __signals: Set<Signal<any>> = new Set();
+    private __signals: Set<Signal<any>> = new Set<Signal<any>>();
 
 
     public receive<T>(signal: Signal<T>, handler: TSignalHandler<T>): void {
@@ -20,24 +20,26 @@ export class Receiver {
     }
 
     public stopReceiving<T>(options: TStopReceivingOptions<T> = {}): void {
-        if (options.signal) {
-            options.signal.off({
+        const { signal, handler } = options;
+
+        if (signal) {
+            signal.off({
                 receiver: this,
-                handler: options.handler
+                handler: handler
             });
 
-            if (!options.signal.hasReceiver(this)) {
-                this.__signals.delete(options.signal);
+            if (!signal.hasReceiver(this)) {
+                this.__signals.delete(signal);
             }
         } else {
-            this.__signals.forEach((signal) => {
-                signal.off({
+            this.__signals.forEach((s) => {
+                s.off({
                     receiver: this,
-                    handler: options.handler
+                    handler: handler
                 });
 
-                if (!signal.hasReceiver(this)) {
-                    this.__signals.delete(signal);
+                if (!s.hasReceiver(this)) {
+                    this.__signals.delete(s);
                 }
             });
         }   

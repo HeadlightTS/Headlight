@@ -1,13 +1,24 @@
-import { BASE_TYPES } from '../baseTypes';
+import { BASE_TYPES } from '../base';
 import { ISignalLike, TSignalHandler, TEventGroup } from './interface.d';
 import { Receiver } from '../receiver/Receiver';
 
 
 export class Signal<T> {
-    private _eventStorage: Map<Receiver, Array<TEventGroup<T>>> = new Map();
+    // public get data(): T {
+    //     return this.__data;
+    // }
 
+    private _eventStorage: Map<Receiver, Array<TEventGroup<T>>> = new Map<Receiver, Array<TEventGroup<T>>>();
+    //private __data: T;
+
+
+    constructor(/*data: T*/) {
+        //this.__data = data;
+    }
 
     public dispatch(data: T): void {
+        //this.__data = data;
+
         this._eventStorage.forEach((groups, receiver) => {
             groups.forEach((eventGroup, index) => {
                 eventGroup.handler.call(receiver, data);
@@ -44,32 +55,34 @@ export class Signal<T> {
         handler?: TSignalHandler<T>,
         receiver?: Receiver
     } = {}): void {
-        if (!options.handler && !options.receiver) {
+        const { receiver, handler } = options;
+
+        if (!handler && !receiver) {
             this._resetEventStorage();    
         }
 
-        if (options.receiver) {
-            if (!options.handler) {
-                this._eventStorage.delete(options.receiver);
+        if (receiver) {
+            if (!handler) {
+                this._eventStorage.delete(receiver);
                 
                 return;
             }
 
-            const groups = this._eventStorage.get(options.receiver);
+            const groups = this._eventStorage.get(receiver);
 
             if (!Array.isArray(groups)) {
                 return;
             }
 
-            if (Signal._removeEventGroupByHandler(groups, options.handler)) {
-                options.receiver.stopReceiving({
+            if (Signal._removeEventGroupByHandler(groups, handler)) {
+                receiver.stopReceiving({
                     signal: this
                 });
             }
         } else {
-            this._eventStorage.forEach((groups, receiver) => {
-                if (Signal._removeEventGroupByHandler(groups, options.handler)) {
-                    receiver.stopReceiving({
+            this._eventStorage.forEach((groups, r) => {
+                if (Signal._removeEventGroupByHandler(groups, handler)) {
+                    r.stopReceiving({
                         signal: this
                     });
                 }
