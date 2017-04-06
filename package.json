@@ -2,7 +2,7 @@
   "name": "headlightts",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/Headlight.ts",
   "scripts": {
     "build": "bash ./scripts/build.sh",
     "pretest": "bash ./scripts/clean.sh",
