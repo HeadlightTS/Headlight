@@ -2,7 +2,6 @@
   "name": "headlightts",
   "version": "0.0.0",
   "description": "",
-  "main": "src/Headlight.ts",
   "scripts": {
     "build": "bash ./scripts/build.sh",
     "pretest": "bash ./scripts/clean.sh",
@@ -32,8 +31,7 @@
     "mocha": "^2.3.3",
     "tslib": "^1.5.0",
     "tslint": "^4.0.2",
-    "typescript": "2.2.x",
-    "typings": "^2.1.0"
+    "typescript": "2.2.x"
   },
   "dependencies": {
     
